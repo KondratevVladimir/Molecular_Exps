@@ -1,0 +1,70 @@
+Training Parameters:
+	save_verbose: True
+	save_iter: 5000
+	print_iter: 100
+	kl_anneal_iter: 2000
+	anneal_iter: 40000
+	anneal_rate: 0.9
+	epoch: 30
+	warmup: 15000
+	max_beta: 1.0
+	step_beta: 0.002
+	beta: 0.0
+	clip_norm: 50.0
+	lr: 0.001
+	depthG: 3
+	depthT: 20
+	latent_size: 56
+	batch_size: 32
+	hidden_size: 450
+	load_epoch: 0
+	save_dir: ./QDB9/experiments/1/
+	vocab: ./QDB9/data/vocab.txt
+	train: ./QDB9/jtvae/processed/
+
+JTNNVAE(
+  (jtnn): JTNNEncoder(
+    (embedding): Embedding(1171, 450)
+    (outputNN): Sequential(
+      (0): Linear(in_features=900, out_features=450, bias=True)
+      (1): ReLU()
+    )
+    (GRU): GraphGRU(
+      (W_z): Linear(in_features=900, out_features=450, bias=True)
+      (W_r): Linear(in_features=450, out_features=450, bias=False)
+      (U_r): Linear(in_features=450, out_features=450, bias=True)
+      (W_h): Linear(in_features=900, out_features=450, bias=True)
+    )
+  )
+  (decoder): JTNNDecoder(
+    (embedding): Embedding(1171, 450)
+    (W_z): Linear(in_features=900, out_features=450, bias=True)
+    (U_r): Linear(in_features=450, out_features=450, bias=False)
+    (W_r): Linear(in_features=450, out_features=450, bias=True)
+    (W_h): Linear(in_features=900, out_features=450, bias=True)
+    (W): Linear(in_features=478, out_features=450, bias=True)
+    (U): Linear(in_features=478, out_features=450, bias=True)
+    (U_i): Linear(in_features=900, out_features=450, bias=True)
+    (W_o): Linear(in_features=450, out_features=1171, bias=True)
+    (U_o): Linear(in_features=450, out_features=1, bias=True)
+    (pred_loss): CrossEntropyLoss()
+    (stop_loss): BCEWithLogitsLoss()
+  )
+  (jtmpn): JTMPN(
+    (W_i): Linear(in_features=40, out_features=450, bias=False)
+    (W_h): Linear(in_features=450, out_features=450, bias=False)
+    (W_o): Linear(in_features=485, out_features=450, bias=True)
+  )
+  (mpn): MPN(
+    (W_i): Linear(in_features=50, out_features=450, bias=False)
+    (W_h): Linear(in_features=450, out_features=450, bias=False)
+    (W_o): Linear(in_features=489, out_features=450, bias=True)
+  )
+  (A_assm): Linear(in_features=28, out_features=450, bias=False)
+  (assm_loss): CrossEntropyLoss()
+  (T_mean): Linear(in_features=450, out_features=28, bias=True)
+  (T_var): Linear(in_features=450, out_features=28, bias=True)
+  (G_mean): Linear(in_features=450, out_features=28, bias=True)
+  (G_var): Linear(in_features=450, out_features=28, bias=True)
+)
+
